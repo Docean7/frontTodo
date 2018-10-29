@@ -1,12 +1,23 @@
+import {
+    REQUEST_ADD_TODO,
+    CHANGE_INPUT,
+    REQUEST_LOGIN,
+    REQUEST_SET_TODOS, RESPOND_ADD_TODO, RESPOND_SET_TODOS, AUTHENTICATE, REQUEST_REGISTRATION
+} from "../constants/actionTypes";
 
-export const ADD_TODO = todo => ({ type: 'ADD_TODO', todo });
+export const requestAddTodo = todo => ({ type: REQUEST_ADD_TODO, todo });
 
-export const SET_TODOS = todos => ({ type: 'SET_TODOS', todos });
+export const respondAddTodo = todo => ({ type: RESPOND_ADD_TODO, todo });
 
-export const CHANGE_INPUT = input => ({ type: 'CHANGE_INPUT', input });
+export const requestSetTodos = () => ({ type: REQUEST_SET_TODOS });
 
-export const REQUEST_LOGIN = userdata => ({ type: 'REQUEST_LOGIN', userdata });
+export const respondSetTodos = todos => ({ type: RESPOND_SET_TODOS, todos });
 
-export const RESPOND_LOGIN = respond => ({ type: RESPOND_LOGIN, respond });
+export const changeInput = input => ({ type: CHANGE_INPUT, input });
 
-export const REJECT_LOGIN = err => ({ type: REJECT_LOGIN, err });
+export const requestLogin = userdata => ({ type: REQUEST_LOGIN, userdata });
+
+export const authenticate = username => ({ type: AUTHENTICATE, username });
+
+export const requestRegistration = userdata => ({ type: REQUEST_REGISTRATION, userdata });
+

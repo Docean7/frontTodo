@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {connect} from 'react-redux';
-import {CHANGE_INPUT} from "../actions";
+import {changeInput} from "../actions";
 import {Link} from "react-router-dom";
-import {setToken} from '../utils/tokenUtils';
+import { requestRegistration } from "../actions";
+
 class Register extends Component {
 
     constructor(props) {
@@ -11,28 +11,20 @@ class Register extends Component {
     }
 
     handleInputChange = (e) => {
-        this.props.dispatch(CHANGE_INPUT({
+        this.props.changeInput({
             field: e.target.name,
             value: e.target.value
-        }))
+        })
     };
 
     handleRegisterSubmit = (e) => {
         e.preventDefault();
-        axios({
-            method: 'post',
-            url: '/api/register',
-            data: this.props.formData
-        }).then(response => {
-            setToken(response.data);
-        }).catch(err => {
-            console.log(err);
-        })
+        this.props.requestRegistration(this.props.formData);
     };
 
     render() {
         return (
-            <div>
+            <>
                 <Link to="/">Login</Link><br/>
                 <form onSubmit={this.handleRegisterSubmit}>
                     <label>
@@ -49,9 +41,13 @@ class Register extends Component {
                     </label>
                     <input type="submit" value="Register"/>
                 </form>
-            </div>
+                <Link to="/todo">Todo</Link>
+            </>
         );
     }
 }
 
-export default connect(state => ({ formData: state.registerForm }))(Register);
+const mapStateToProps = state => ({ formData: state.registerForm });
+const mapDispatchToProps = { requestRegistration, changeInput };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

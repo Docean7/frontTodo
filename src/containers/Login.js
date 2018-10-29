@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { REQUEST_LOGIN } from "../actions";
+import { requestLogin } from "../actions";
 
 
 
@@ -21,7 +21,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <Link to="/register">Sign Up</Link><br/>
                 <form onSubmit={this.handleLoginSubmit}>
                     <div>
@@ -34,14 +34,13 @@ class Login extends Component {
                     </div>
                     <button type="submit">Login</button>
                 </form>
-            </div>
+                <Link to="/todo">Todo</Link>
+            </>
         )
     }
 }
 
 const mapStateToProps = state => ({ formData: state.form.loginForm });
-const mapDispatchToProps = dispatch => ({
-    requestLogin: data => dispatch(REQUEST_LOGIN(data))
-});
+const mapDispatchToProps = { requestLogin };
 
 export default reduxForm({form: 'loginForm'})(connect(mapStateToProps, mapDispatchToProps)(Login));

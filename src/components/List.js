@@ -11,11 +11,7 @@ class List extends Component {
     }
 
     componentDidMount() {
-        axios({
-            method: 'get',
-            url: '/api/getall',
-            headers: {'Authorization': `bearer ${ getToken() }`}
-        }).then(response => this.props.setTodos(response.data))
+       this.props.requestSetTodos()
     }
 
     render() {
