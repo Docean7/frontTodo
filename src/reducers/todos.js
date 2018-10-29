@@ -3,11 +3,7 @@ const todos = (state = [], action) => {
       case 'ADD_TODO':
           return [
               ...state,
-              {
-                  id: action.id,
-                  text: action.text,
-                  completed: false
-              }
+              action.todo
           ];
 
       case 'SET_TODOS':

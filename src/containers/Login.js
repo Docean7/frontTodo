@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import {Link, withRouter} from 'react-router-dom';
-import {setToken} from '../utils/tokenUtils';
+import { Link } from 'react-router-dom';
+import { REQUEST_LOGIN } from "../actions";
+
 
 
 class Login extends Component {
@@ -15,18 +15,7 @@ class Login extends Component {
     handleLoginSubmit = (e) => {
         e.preventDefault();
         const data = this.props.formData.values;
-        const { history } = this.props;
-        axios({
-            method: 'post',
-            url: '/api/auth',
-            data
-        }).then(response => {
-            setToken(response.data);
-            history.push('/todo');
-        })
-            .catch(err => {
-                alert('Wrong username or password');
-            })
+        this.props.requestLogin(data);
     };
 
 
@@ -50,4 +39,9 @@ class Login extends Component {
     }
 }
 
-export default reduxForm({form: 'loginForm'})(withRouter(connect(state => ({ formData: state.form.loginForm }))(Login)));
+const mapStateToProps = state => ({ formData: state.form.loginForm });
+const mapDispatchToProps = dispatch => ({
+    requestLogin: data => dispatch(REQUEST_LOGIN(data))
+});
+
+export default reduxForm({form: 'loginForm'})(connect(mapStateToProps, mapDispatchToProps)(Login));

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {SET_TODOS} from '../actions'
+import {ADD_TODO} from '../actions'
 import axios from "axios";
 import {getToken} from "../utils/tokenUtils";
 
@@ -14,7 +14,7 @@ class AddTodo extends Component {
             url: '/api/addtodo',
             data: { text: this.textInput.value },
             headers: {'Authorization': `bearer ${ getToken() }`}
-        }).then(response => this.props.setTodos(response.data))
+        }).then(response => this.props.addTodo(response.data))
             .catch(err => {
                 console.log(err);
             });
@@ -43,7 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setTodos: todos => dispatch(SET_TODOS(todos))
+    addTodo: todo => dispatch(ADD_TODO(todo))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)
