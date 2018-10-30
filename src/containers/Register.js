@@ -6,10 +6,6 @@ import { requestRegistration } from "../actions";
 
 class Register extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     handleInputChange = (e) => {
         this.props.changeInput({
             field: e.target.name,
