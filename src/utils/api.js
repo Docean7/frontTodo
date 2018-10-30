@@ -1,5 +1,4 @@
 import axios from 'axios';
-import history from '../history';
 import {getToken} from "./tokenUtils";
 
 export const loginPost = data => {
@@ -35,4 +34,4 @@ export const registerPost = data => {
     })
 };
 
-export const redirect = route => history.push(route);
+

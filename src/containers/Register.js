@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {changeInput} from "../actions";
 import {Link} from "react-router-dom";
 import { requestRegistration } from "../actions";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class Register extends Component {
 
@@ -21,22 +23,33 @@ class Register extends Component {
     render() {
         return (
             <>
-                <Link to="/">Login</Link><br/>
+                <Link to="/">Login</Link><br/><br/>
                 <form onSubmit={this.handleRegisterSubmit}>
-                    <label>
-                        Username:
-                        <input name="username" onChange={this.handleInputChange}/>
-                    </label>
-                    <label>
-                        Password:
-                        <input name="password" onChange={this.handleInputChange} type="password"/>
-                    </label>
-                    <label>
-                        Email:
-                        <input name="email" onChange={this.handleInputChange}/>
-                    </label>
-                    <input type="submit" value="Register"/>
-                </form>
+                    <TextField
+                        variant="outlined"
+                        hintText="username"
+                        name="username"
+                        label="username"
+                        onChange={this.handleInputChange}/>
+
+                    <TextField
+                        variant="outlined"
+                        hintText="password"
+                        name="password"
+                        label="password"
+                        onChange={this.handleInputChange}
+                        type="password"/>
+
+                    <TextField
+                        variant="outlined"
+                        hintText="email"
+                        name="email"
+                        label="email"
+                        onChange={this.handleInputChange}
+                        type="email"/>
+                    <br/><br/>
+                    <Button variant="contained" color="primary" type="submit">Register</Button>
+                </form><br/>
                 <Link to="/todo">Todo</Link>
             </>
         );

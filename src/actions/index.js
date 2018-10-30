@@ -15,7 +15,7 @@ export const respondSetTodos = todos => ({ type: RESPOND_SET_TODOS, todos });
 
 export const changeInput = input => ({ type: CHANGE_INPUT, input });
 
-export const requestLogin = userdata => ({ type: REQUEST_LOGIN, userdata });
+export const requestLogin = (userdata, history) => ({ type: REQUEST_LOGIN, userdata, history });
 
 export const authenticate = username => ({ type: AUTHENTICATE, username });
 

@@ -1,16 +1,18 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { loginPost, redirect } from "../utils/api";
+import { loginPost } from "../utils/api";
 import {setToken} from '../utils/tokenUtils';
 import {REQUEST_LOGIN} from "../constants/actionTypes";
 import {authenticate} from "../actions";
 
-function* handleLogin({userdata}) {
-    console.log(userdata)
+
+function* handleLogin({ userdata, history }) {
+    console.log(history);
     try {
         const { data } = yield call(loginPost, userdata);
         yield call(setToken, data.token);
         yield put(authenticate(data.username));
-        yield call(redirect, '/todo');
+        //yield put(push('/todo'));
+        yield call(history.push, '/todo')
     } catch (err) {
         const loginError = err.response.data.message;
         console.log(loginError);
