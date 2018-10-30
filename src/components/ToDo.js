@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 
 class ToDo extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     handleLogout = () => {
         const { history }  = this.props;
         removeToken();

@@ -1,46 +1,40 @@
-import React, {Component} from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { requestLogin } from "../actions";
+import React from 'react';
+import {compose} from "redux";
+import {Field, reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {requestLogin} from "../actions";
 
 
+function Login(props) {
+    return (
+        <>
+            <Link to="/register">Sign Up</Link><br/>
+            <form onSubmit={props.handleSubmit}>
+                <div>
+                    <label htmlFor="username">Username</label>
+                    <Field name="username" component="input"/>
+                </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <Field name="password" component="input" type="password"/>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <Link to="/todo">Todo</Link>
+        </>
+    )
 
-class Login extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-
-    handleLoginSubmit = (e) => {
-        e.preventDefault();
-        const data = this.props.formData.values;
-        this.props.requestLogin(data);
-    };
-
-
-    render() {
-        return (
-            <>
-                <Link to="/register">Sign Up</Link><br/>
-                <form onSubmit={this.handleLoginSubmit}>
-                    <div>
-                        <label htmlFor="username">Username</label>
-                        <Field name="username" component="input"/>
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <Field name="password" component="input" type="password"/>
-                    </div>
-                    <button type="submit">Login</button>
-                </form>
-                <Link to="/todo">Todo</Link>
-            </>
-        )
-    }
 }
 
-const mapStateToProps = state => ({ formData: state.form.loginForm });
-const mapDispatchToProps = { requestLogin };
+const mapStateToProps = state => ({formData: state.form.loginForm});
+const mapDispatchToProps = {onSubmit: requestLogin};
 
-export default reduxForm({form: 'loginForm'})(connect(mapStateToProps, mapDispatchToProps)(Login));
+const withForm = reduxForm({form: 'loginForm'});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+    withConnect,
+    withForm
+)(Login);

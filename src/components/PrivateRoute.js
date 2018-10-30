@@ -1,5 +1,5 @@
 import {Redirect, Route} from "react-router-dom";
-import {getToken} from "./tokenUtils";
+import {getToken} from "../utils/tokenUtils";
 import React from "react";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (

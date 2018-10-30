@@ -5,6 +5,7 @@ import {REQUEST_LOGIN} from "../constants/actionTypes";
 import {authenticate} from "../actions";
 
 function* handleLogin({userdata}) {
+    console.log(userdata)
     try {
         const { data } = yield call(loginPost, userdata);
         yield call(setToken, data.token);

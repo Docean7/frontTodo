@@ -1,8 +1,8 @@
-import {call, put, takeLatest} from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { redirect, registerPost } from "../utils/api";
-import {setToken} from "../utils/tokenUtils";
-import {authenticate} from "../actions";
-import { REQUEST_REGISTRATION} from "../constants/actionTypes";
+import { setToken } from "../utils/tokenUtils";
+import { authenticate } from "../actions";
+import { REQUEST_REGISTRATION } from "../constants/actionTypes";
 
 function* handleRegistration({userdata}) {
     try {

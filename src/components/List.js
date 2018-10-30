@@ -1,30 +1,22 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import axios from "axios";
-import {getToken} from "../utils/tokenUtils";
 
+function List(props) {
 
-class List extends Component {
+    useEffect(() => {
+        props.requestSetTodos()
+    }, []);
 
-    constructor(props) {
-        super(props)
-    }
+    return (
+        <div>
+            <ul>
+                {props.todos.map(task =>
+                    <li key={task.id}>{task.text}</li>
+                )}
+            </ul>
+        </div>
+    )
 
-    componentDidMount() {
-       this.props.requestSetTodos()
-    }
-
-    render() {
-        return(
-            <div>
-                <ul>
-                    {this.props.todos.map(task =>
-                        <li key={task.id}>{task.text}</li>
-                    )}
-                </ul>
-            </div>
-        )
-    }
 }
 
 List.propTypes = {
